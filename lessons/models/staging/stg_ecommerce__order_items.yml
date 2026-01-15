@@ -1,0 +1,38 @@
+# Needed for every dbt yml file - https://docs.getdbt.com/faqs/project/why-version-2
+version: 2
+
+models:
+  - name: stg_ecommerce__order_items
+    description: "Line items from orders"
+    columns:
+      - name: order_item_id
+        description: ""
+        tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_ecommerce__orders')
+              field: order_id
+
+      - name: user_id
+        description: ""
+        tests:
+          - not_null
+
+      - name: product_id
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_ecommerce__products')
+              field: product_id
+
+      - name: item_sale_price
+        description: "How much the item sold for"
+        tests:
+          - not_null
