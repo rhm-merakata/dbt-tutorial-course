@@ -16,8 +16,12 @@ SELECT
   delivered_at,
   
   -- Other columns
-  source,
+  status,
   num_of_item AS num_items_ordered
+
+	{#- Unused columns:
+		- gender
+	#}
 
 FROM source
 
